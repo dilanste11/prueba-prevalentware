@@ -23,18 +23,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         transactions = await prisma.transaction.findMany({
           include: {
             user: {
-              select: { name: true, email: true }, // Incluimos el nombre para mostrarlo en la tabla
+              select: { name: true, email: true },
             },
           },
           orderBy: {
-            date: "desc", // Ordenar por fecha (más reciente primero)
+            date: "desc", 
           },
         });
       } else {
         // CASO USUARIO NORMAL: Trae SOLO lo suyo
         transactions = await prisma.transaction.findMany({
           where: {
-            userId: session.user.id, // <--- AQUÍ ESTÁ EL FILTRO MÁGICO
+            userId: session.user.id, 
           },
           include: {
             user: {

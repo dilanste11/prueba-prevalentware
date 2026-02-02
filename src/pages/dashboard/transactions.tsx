@@ -16,7 +16,7 @@ import {
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { PlusCircle, Search, CalendarIcon } from "lucide-react"; // Importamos icono calendario
+import { PlusCircle, Search, CalendarIcon } from "lucide-react";
 
 // --- TIPOS ---
 interface Transaction {
@@ -112,7 +112,7 @@ export default function TransactionsPage({ user }: PageProps) {
           amount: Number(newTransaction.amount),
           concept: newTransaction.concept,
           type: newTransaction.type,
-          date: new Date(newTransaction.date).toISOString(), // Enviamos ISO string al backend
+          date: new Date(newTransaction.date).toISOString(),
         }),
       });
 

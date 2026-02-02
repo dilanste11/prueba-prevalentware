@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ message: "No autorizado" });
     }
 
-    // 3. Obtener y Validar Datos (AHORA INCLUIMOS DATE)
+    // 3. Obtener y Validar Datos 
     const { amount, concept, type, date } = req.body;
 
     if (!amount || typeof amount !== "number") {
@@ -45,8 +45,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       data: {
         amount,
         concept,
-        type,
-        // --- CAMBIO AQUÍ: ---
+        type,        
         // Si nos envían fecha, la usamos. Si no, usa la actual.
         date: date ? new Date(date) : new Date(),
         

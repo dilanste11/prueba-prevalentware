@@ -25,7 +25,6 @@ interface ReportData {
   transactions: Transaction[];
 }
 
-// Tipo estricto para las Props de la página (Adiós 'any')
 interface ReportsPageProps {
   user: {
     id: string;

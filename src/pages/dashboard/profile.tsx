@@ -31,7 +31,7 @@ export default function ProfilePage({ user }: PageProps) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("/api/user/update-phone", { // Usamos el mismo endpoint mejorado
+      const res = await fetch("/api/user/update-phone", { 
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone }),
