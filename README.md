@@ -84,6 +84,15 @@ Sigue estos pasos para ejecutar el proyecto localmente:
 
 ## ☁️ Despliegue en Vercel
 
+### 🚀 Demo en Vivo
+El proyecto ya se encuentra desplegado y funcional. Puedes probarlo aquí:
+👉 **[https://prueba-prevalentware-nine.vercel.app](https://prueba-prevalentware-nine.vercel.app)**
+
+---
+
+### Instrucciones para desplegar tu propia instancia
+Si deseas desplegar este proyecto en tu propia cuenta de Vercel, sigue estos pasos:
+
 Este proyecto está optimizado para desplegarse en [Vercel](https://vercel.com/), la plataforma nativa de Next.js.
 
 1. **Sube tu código a GitHub** (asegúrate de no subir el archivo `.env`).
