@@ -1,78 +1,88 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { auth } from "@/lib/auth";
+import { signIn } from "@/lib/auth-client";
+import { fromNodeHeaders } from "better-auth/node";
+import { GetServerSideProps } from "next";
+import { Github, Wallet, ArrowRight, ShieldCheck } from "lucide-react";
 
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    // FONDO: Gradiente radial oscuro y moderno
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#0a0a0a] to-black text-white p-6 relative overflow-hidden">
+      
+      {/* ELEMENTOS DECORATIVOS DE FONDO (Orbes de luz) */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] animate-pulse delay-1000"></div>
+      </div>
+
+      {/* TARJETA PRINCIPAL (Efecto Cristal/Glassmorphism) */}
+      <div className="max-w-md w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-8 relative z-10 text-center">
+        
+        {/* LOGO ANIMADO */}
+        <div className="mx-auto bg-gradient-to-tr from-blue-600 to-indigo-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-900/40 group hover:scale-105 transition-transform duration-300">
+          <Wallet className="text-white w-10 h-10 group-hover:rotate-12 transition-transform duration-300" />
+        </div>
+
+        {/* TÍTULO CON GRADIENTE */}
+        <h1 className="text-4xl font-extrabold tracking-tight mb-3 bg-gradient-to-r from-white via-blue-100 to-slate-400 bg-clip-text text-transparent">
+          Finanzas App
+        </h1>
+        
+        <p className="text-slate-400 mb-8 text-lg leading-relaxed font-light">
+          Control total de tu dinero.<br/>
+          <span className="text-sm flex items-center justify-center gap-2 mt-2 text-slate-500">
+            <ShieldCheck size={14} /> Seguro. Rápido. Simple.
+          </span>
+        </p>
+
+        {/* BOTÓN DE LOGIN MEJORADO */}
+        <button
+          onClick={() => signIn.social({
+            provider: "github",
+            callbackURL: "/dashboard"
+          })}
+          className="w-full group flex items-center justify-center gap-3 bg-white text-black font-bold py-4 px-6 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0"
+        >
+          <Github size={22} />
+          <span>Ingresar con GitHub</span>
+          {/* Flecha que aparece al pasar el mouse */}
+          <ArrowRight size={18} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-blue-600" />
+        </button>
+
+        {/* FOOTER DISCRETO */}
+        <div className="mt-8 pt-6 border-t border-white/5 flex flex-col gap-1">
+          <p className="text-xs text-slate-600 font-medium uppercase tracking-widest">
+            Prueba Técnica Frontend
+          </p>
+          <p className="text-[10px] text-slate-700">
+            Desarrollado con Next.js & Better Auth
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
+
+/**
+ * ----------------------------------------------------------------
+ * PROTECCIÓN INVERSA (Server Side)
+ * ----------------------------------------------------------------
+ */
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await auth.api.getSession({
+    headers: fromNodeHeaders(ctx.req.headers),
+  });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
